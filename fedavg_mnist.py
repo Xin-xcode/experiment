@@ -267,7 +267,7 @@ def arguments() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--torch-threads", type=int, default=4)
     parser.add_argument("--data-dir", type=Path, default=Path(__file__).parent / "data")
-    parser.add_argument("--output-dir", type=Path, default=Path(__file__).parent / "runs" / "baseline")
+    parser.add_argument("--output-dir", type=Path, default=Path(__file__).parent / "runs" / "idd_fedavg" / "baseline")
     args = parser.parse_args()
     if args.clients < 1 or not 1 <= args.clients_per_round <= args.clients:
         parser.error("clients-per-round must be between 1 and clients")

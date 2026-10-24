@@ -1,0 +1,22 @@
+{
+  "clients": 10,
+  "clients_per_round": 10,
+  "rounds": 1,
+  "local_epochs": 1,
+  "batch_size": 32,
+  "learning_rate": 0.01,
+  "digit_eight_fraction": 0.01,
+  "partition": "iid",
+  "eight_clients": 2,
+  "model": "mlp",
+  "max_local_batches": null,
+  "seed": 42,
+  "torch_threads": 4,
+  "data_dir": "D:\\Work_and_Learn\\project\\mqk_experiment\\fd_global_adapt\\data",
+  "output_dir": "runs\\first_round",
+  "train_samples": 54696,
+  "train_digit_8": 547,
+  "actual_digit_eight_fraction": 0.010000731314904197,
+  "test_samples": 10000,
+  "note": "No differential privacy is applied in this FedAvg baseline."
+}

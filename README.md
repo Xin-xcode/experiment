@@ -21,7 +21,7 @@ CUDA 版 PyTorch 安装包约 2 GB；这里的安装命令针对当前 Windows�
 在本目录的 PowerShell 中执行：
 
 ```powershell
-.\run.cmd --rounds 1 --output-dir runs/first_round
+.\run.cmd --rounds 1 --output-dir runs/idd_fedavg/first_round
 ```
 
 这会做 **10 个客户端全部参与、每个客户端完整训练 1 个本地 epoch** 的一轮 FedAvg。默认模型是较轻量的 MLP，方便在 CPU 上检查流程；它的绝对准确率不能直接与论文使用 CNN 得到的表格数值比较。
@@ -29,8 +29,8 @@ CUDA 版 PyTorch 安装包约 2 GB；这里的安装命令针对当前 Windows�
 正式基线可先运行 20 轮观察，再扩展到 200 轮：
 
 ```powershell
-.\run.cmd --rounds 20 --output-dir runs/iid_20
-.\run.cmd --rounds 200 --output-dir runs/iid_200
+.\run.cmd --rounds 20 --output-dir runs/idd_fedavg/iid_20
+.\run.cmd --rounds 200 --output-dir runs/idd_fedavg/iid_200
 ```
 
 若想使用与论文相同的两层卷积结构，在命令末尾加 `--model paper-cnn`。CPU 训练会明显更慢。
@@ -46,10 +46,12 @@ CUDA 版 PyTorch 安装包约 2 GB；这里的安装命令针对当前 Windows�
 例如分布不均的对照实验：
 
 ```powershell
-.\run.cmd --rounds 20 --partition concentrated8 --eight-clients 2 --output-dir runs/concentrated8_20
+.\run.cmd --rounds 20 --partition concentrated8 --eight-clients 2 --output-dir runs/idd_fedavg/concentrated8_20
 ```
 
 ## 输出怎么看
+
+现有的不加 DP 的 FedAvg 结果集中在 `runs/idd_fedavg/`；后续加入 DP 时可另建 `runs/dp_fedavg/`，便于按方法对比。每次运行使用独立的子目录，以免覆盖已有结果。已有运行在完成后被移动到 `idd_fedavg/`，其中 `config.json` 的 `output_dir` 保留运行时的原始路径。
 
 - `clients.csv`：每个客户端的数据量和 0–9 各数字的数量，先检查它以确认分组正确。
 - `metrics.csv`：第 0 轮训练前及每轮后的测试集总体准确率/Loss、数字 2 准确率/Loss、数字 8 准确率/Loss。
